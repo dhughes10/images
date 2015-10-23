@@ -7,25 +7,65 @@
   <script>
 
   //declare your images as a global variable
+  var crowd;
+  var man;
+  var layer;
+  var gary;
  
 
 	function preload(){
 
 		// Load the image
+		crowd = loadImage("../assets/crowded-street.jpg");
+		man = loadImage("../assets/businessman.png");
+		layer = loadImage("../assets/crowded-street top layer.png");
+		gary = loadImage("../assets/businessmangary.png")
+
 	}
 
 
 	function setup() {
 
 	  //set up your canvas
+	  noCursor();
+
+      createCanvas(crowd.width, crowd.height);
+
 
 	}
 
 	function draw() {
+		
+		//filters
+		crowd.filter(GRAY);
+       	layer.filter(GRAY);
 
-		//draw
+       	//background image with blend
 
-	}
+			image(crowd, 0, 0, crowd.width, crowd.height);
+			blend(crowd, 10, 0, crowd.width, crowd.height, 0, 0, crowd.width, crowd.height, OVERLAY);
+      
+     	//moving man with gary switch when mouse is pressed
+
+      			if(mouseIsPressed){
+
+         			image(gary, mouseX, mouseY,mouseX * 2, mouseY * 2);
+
+     			 } else{
+
+       				image(man, mouseX, mouseY,man.width,man.height);
+
+       				   }
+
+       	//layer with blend
+
+      		image(layer, 0, 0,layer.width,layer.height);
+      		blend(layer, 10, 0, layer.width, layer.height, 0, 0, layer.width, layer.height, OVERLAY);
+
+		}
+
+
+
 
 	</script>
 </head>
